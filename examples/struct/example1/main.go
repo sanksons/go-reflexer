@@ -30,26 +30,22 @@ func example1() {
 		panic("Expects a pointer.")
 	}
 	//fmt.Println(reflectObj.String())
-	childSlice, err := reflectObj.GetChild()
-	if err != nil {
-		panic(err.Error())
-	}
+	childSlice := reflectObj.GetChild()
+
 	//fmt.Println(childSlice.String())
 	if !childSlice.CheckIfSlice() { //since we expect a slice here check for it.
 		panic("Expects a slice.")
 	}
 
-	childStruct, err := childSlice.GetChild()
-	if err != nil {
-		panic(err.Error())
-	}
+	childStruct := childSlice.GetChild()
+
 	if !childStruct.CheckIfStruct() { //since we expect a struct here check for it.
 		panic("Expects a struct.")
 	}
 	//fmt.Println(childStruct.String())
 
 	//Since we have reached struct lets extract structs field information.
-	structInfo, err := reflexer.GetInfoAboutFieldsofStruct(*childStruct)
+	structInfo, _ := reflexer.GetInfoAboutFieldsofStruct(*childStruct)
 	fmt.Printf("%v\n", structInfo)
 
 	//No, we have to create new structs of the type User and assign values to it.

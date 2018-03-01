@@ -23,10 +23,10 @@ func (this *ReflectObj) HasChild() bool {
 }
 
 //Make sure to call Has child before calling this.
-func (this *ReflectObj) GetChild() (*ReflectObj, error) {
+func (this *ReflectObj) GetChild() *ReflectObj {
 
 	if this.child != nil {
-		return this.child, nil
+		return this.child
 	}
 	child := new(ReflectObj)
 	child.T = this.T.Elem()
@@ -36,7 +36,7 @@ func (this *ReflectObj) GetChild() (*ReflectObj, error) {
 	}
 	child.SetParent(this)
 	this.child = child
-	return this.child, nil
+	return this.child
 }
 
 func (this *ReflectObj) GetParent() *ReflectObj {
